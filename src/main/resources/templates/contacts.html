@@ -71,9 +71,12 @@
 				</tbody>
 			</table>
 		</div>
+		<div th:if="${result == 1}" class="alert alert-success" role="alert">Added Successfully</div>
+		<div th:if="${result == 0}" class="alert alert-danger" role="alert">Error adding contact!!</div>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact</button>
-		
+		<a href="#" th:href="@{/contacts/contactform}">
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact</button>
+		</a>
 		<a href="#" th:href="@{/login?logout}">
 			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</button>
 		</a>
