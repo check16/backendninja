@@ -9,5 +9,7 @@ import com.asanast.entity.Contact;
 
 @Repository("contactRepository")
 public interface ContactRepository extends JpaRepository<Contact, Serializable>{
+	
+	public Contact findById(int id);
 
 }
