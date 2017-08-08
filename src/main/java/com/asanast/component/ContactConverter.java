@@ -21,11 +21,11 @@ public class ContactConverter {
 	
 	public ContactModel convertContactToContactModel(Contact contact) {
 		ContactModel contactModel = new ContactModel();
-		contactModel.setCity(contactModel.getCity());
-		contactModel.setFirstname(contactModel.getFirstname());
-		contactModel.setId(contactModel.getId());
-		contactModel.setLastname(contactModel.getLastname());
-		contactModel.setTelephone(contactModel.getTelephone());
+		contactModel.setCity(contact.getCity());
+		contactModel.setFirstname(contact.getFirstname());
+		contactModel.setId(contact.getId());
+		contactModel.setLastname(contact.getLastname());
+		contactModel.setTelephone(contact.getTelephone());
 		
 		return contactModel;
 	}

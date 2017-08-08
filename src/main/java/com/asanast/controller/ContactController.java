@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.asanast.constant.ViewConstant;
 import com.asanast.model.ContactModel;
@@ -29,7 +30,7 @@ public class ContactController {
 
 	@GetMapping("/cancel")
 	public String cancel() {
-		return ViewConstant.CONTACTS;
+		return "redirect:/contacts/showcontacts";
 	}
 
 	@PostMapping("/addcontact")
@@ -40,8 +41,14 @@ public class ContactController {
 			model.addAttribute("result", 0);
 		}
 
-		return ViewConstant.CONTACTS;
-
+		return "redirect:/contacts/showcontacts";
+	}
+	
+	@GetMapping("/showcontacts")
+	public ModelAndView showContacts() {
+		ModelAndView mav = new ModelAndView(ViewConstant.CONTACTS);
+		mav.addObject("contacts", contactService.listAllContacts());
+		return mav;
 	}
 
 }
