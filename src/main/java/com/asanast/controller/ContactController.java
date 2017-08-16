@@ -2,6 +2,9 @@ package com.asanast.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ public class ContactController {
 	@Qualifier("contactServiceImpl")
 	private ContactService contactService;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/contactform")
 	public String redirectContactForm(@RequestParam(name="id", required=false) int id, Model model) {
 		ContactModel contact = new ContactModel();
@@ -52,6 +56,8 @@ public class ContactController {
 	@GetMapping("/showcontacts")
 	public ModelAndView showContacts() {
 		ModelAndView mav = new ModelAndView(ViewConstant.CONTACTS);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("username", user.getUsername());
 		mav.addObject("contacts", contactService.listAllContacts());
 		return mav;
 	}
